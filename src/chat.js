@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
+
 function Chat(){
     const [message, setMessage] = useState('');
     const [response, setResponse] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:8080/', {
+        fetch('http://localhost:8000/interview', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
