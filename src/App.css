@@ -38,7 +38,7 @@ body {
   height:100%;
   padding:0px ;
   position: relative;
-  z-index: 2 ;
+  z-index: 3 ;
 }
 .second-wrap-1{
   display: flex;
@@ -107,6 +107,7 @@ body {
   max-width: 500px ;
   height: 75% ;
   background-color: rgba(52, 53, 65, 0.8); 
+  background-color: rgba(125, 113, 234, 0.5);
   padding: 10px 5px 10px 15px ;
   box-sizing: border-box ;
   border-radius: 10px ;
@@ -123,7 +124,7 @@ body {
 .messages-container{
   overflow-y:scroll ;
   height: calc(100% - 10px); 
-  margin-top: 10px;
+  margin-top: 2px;
 }
 .message {
   font-weight: bold;
@@ -151,8 +152,19 @@ body {
 }
 .ai {
   float: left;
-  background-color: rgba(0, 0, 0, 0.4); 
+  background-color: rgba(0, 0, 0, 0.5); 
   margin-bottom: 20px;
+}
+.login {
+  color: white;
+  width:350px;
+  height: 35%;
+  max-height: 400px ;
+  padding:20px ;
+  border-radius: 10px ;
+  background-color: rgba(125, 113, 234, 0.4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 @media (max-width: 450px) {
   .chat-container {
@@ -160,6 +172,9 @@ body {
   }
   .message {
     font-size: 13px;
+  }
+  .login {
+    width: 250px;
   }
 }
 .icon {
@@ -172,13 +187,14 @@ body {
 .bot-icon{
   float:left;
   color: white;
-  margin:3px;
+  margin: 3px 2px 2px 2px;
   transform: rotate(15deg);
 }
 .input-container {
   display: flex ;
   justify-content: space-between; 
   align-items: center;
+  margin: 10px 5px 0px 0px;
 }
 .input-container > input {
   width: calc(100% - 70px) ;

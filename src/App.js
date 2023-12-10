@@ -5,6 +5,7 @@ import ChatApp from './chatApp.js'
 import LoginPage from './login.js'
 import { Routes, Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
 
@@ -69,48 +70,67 @@ function App() {
     moveCircles();
   }, []);
 
-    
+  const pageVariants = {
+    initial: { opacity: 0, x: '100vw' },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: '-100vw' },
+    transition: { duration: 0.8 }
+  };
+
   return (
     <>
       <div className='App'>
         {[...Array(15)].map((_, index) => (
           <div key={index} className="circle"></div>
         ))}
-        <Routes>
-          <Route path='/' element={
-              <div className='main-wrap'>
-                <div className="wave">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                    <path fill="#7D71EA" fillOpacity="1" d="M0,224L40,208C80,192,160,160,240,149.3C320,139,400,149,480,165.3C560,181,640,203,720,197.3C800,192,880,160,960,138.7C1040,117,1120,107,1200,117.3C1280,128,1360,160,1400,176L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
-                  </svg>
+
+          <Routes>
+            <Route path='/' element={
+                <div className='main-wrap'>
+                  <div className="wave">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                      <path fill="#7D71EA" fillOpacity="1" d="M0,224L40,208C80,192,160,160,240,149.3C320,139,400,149,480,165.3C560,181,640,203,720,197.3C800,192,880,160,960,138.7C1040,117,1120,107,1200,117.3C1280,128,1360,160,1400,176L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+                    </svg>
+                  </div>
+                  <motion.div
+                  className='page'
+                  variants={pageVariants}
+                  initial='initial'
+                  animate='animate'
+                  exit='exit'
+                  transition='transition'
+                  style={{ position: 'relative', zIndex: '2' }}
+                  >
+                  <div className='second-wrap'>
+                    <div className='second-wrap-1'>
+                      <h1>AI 면접관과<br/>함께하는 모의 면접</h1>
+                    </div>
+                    <div className='second-wrap-2'>
+                      <p>
+                      어떤 직업, 직무든 상관없어요<br/>면접 단골 질문만 모았어요!<br/><br/>
+                      실전과 유사한 모의 면접을 통해<br/>면접을 대비하세요 👍</p>
+                    </div>
+                    <div className='testInfo'>
+                      <p>
+                        1. 직업, 직무에 맞는 AI 면접관과 매칭됩니다<br/>
+                        2. 자주 묻는 면접 질문 10개가 질문됩니다
+                      </p>
+                    </div>
+                    
+                    <Link className='custom-button' to="/login">
+                    모의 면접 진행하기
+                  </Link>
+                    <div className='main-imgBox'>
+                      <img src="94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif" alt="AI 인터뷰"/>
+                    </div>
+                  </div>
+                  </motion.div>
                 </div>
-                <div className='second-wrap'>
-                  <div className='second-wrap-1'>
-                    <h1>AI 면접관과<br/>함께하는 모의 면접</h1>
-                  </div>
-                  <div className='second-wrap-2'>
-                    <p>
-                    어떤 직업, 직무든 상관없어요<br/>면접 단골 질문만 모았어요!<br/><br/>
-                    실전과 유사한 모의 면접을 통해<br/>면접을 대비하세요 👍</p>
-                  </div>
-                  <div className='testInfo'>
-                    <p>
-                      1. 직업, 직무에 맞는 AI 면접관과 매칭됩니다<br/>
-                      2. 자주 묻는 면접 질문 10개가 질문됩니다
-                    </p>
-                  </div>
-                  <Link className='custom-button' to="/login">
-                  모의 면접 진행하기
-                </Link>
-                  <div className='main-imgBox'>
-                    <img src="94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif" alt="AI 인터뷰"/>
-                  </div>
-                </div>
-              </div>
-          }/>
-          <Route path='/ChatApp' element={<ChatApp/>}/>
-          <Route path='/login' element={<LoginPage/>}/>
-        </Routes>
+                
+            }/>
+            <Route path='/ChatApp' element={<ChatApp/>}/>
+            <Route path='/login' element={<LoginPage/>}/>
+          </Routes>
       </div>
       <footer>
         ⓒ 2023.<br/>✔ Contact<br/>eogks999@naver.com
