@@ -4,32 +4,34 @@ import { motion, AnimatePresence } from "framer-motion";
 
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [job, setJob] = useState('');
+  const [gender, setGender] = useState('');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(username)
-    console.log(password)
-  }, [password]);
 
   const handleLogin = async () => {
     try {
+      if (!nickname || !job || !gender) {
+        alert('닉네임과 희망 직무를 입력해주세요.');
+        return;
+      }
+
       const response = await fetch('http://localhost:8000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          id: username, 
-          pw: password }),
+          nickname: nickname, 
+          job: job,
+          gender: gender }),
       })
       .then((response) => {
         if (response.ok) { // 응답send 하면 true 반환
-          navigate('/chatApp');
+          navigate('/chatApp', { state: { nickname, job, gender } });
           return response.json();
         }
-        throw new Error('Network response was not ok.');
+        throw new Error('서버 에러');
       })
     } catch (error) {
       console.error('Error:', error);
@@ -59,25 +61,31 @@ const LoginPage = () => {
       style={{ position: 'relative', zIndex: '2'}}>
 
       <div className='login'>
-        <h2>Login</h2>
+        <h2>Before We Get Started</h2>
         <form onSubmit={(e) => { e.preventDefault();handleLogin();}}>
           <input
             type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Nickname"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
             style={{ margin: '10px', padding: '8px', width: '90%' }}
           />
           <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            type="text"
+            placeholder="Job"
+            value={job}
+            onChange={(e) => setJob(e.target.value)}
             style={{ margin: '10px', padding: '8px', width: '90%' }}
           />
-          <button type="submit" style={{ margin: '10px', padding: '8px', cursor: 'pointer', width: '90%' }}
+            <input type="radio" id="male" name="gender" value="male"
+            onChange={(e) => setGender(e.target.value)} />
+            <label htmlFor="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female"
+            onChange={(e) => setGender(e.target.value)}/>
+            <label htmlFor="female">Female</label>
+          <button className='send-btn' type="submit" style={{ margin: '10px', padding: '8px', cursor: 'pointer', width: '90%' }}
           // onClick={()=>{navigate('/chatApp')}}
-          >Login</button>
+          >start</button>
         </form>
       </div>
       </motion.div>

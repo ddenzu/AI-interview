@@ -2,14 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faRobot } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from 'react-router-dom';
+import Swal from "sweetalert2";
 
 const ChatApp = () => {
+  const location = useLocation();
+  const { state } = location;
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [responses, setResponses] = useState([]);
+  const [clickedText, setClickedText] = useState('');
   const messagesStartRef = useRef(null);
-
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -39,6 +42,8 @@ const ChatApp = () => {
         body: JSON.stringify({
           userMessages: messages,
           assistantMessages: responses,
+          nickname: state.nickname,
+          job: state.job
         })
         })
         const data = await response.json();
@@ -48,6 +53,54 @@ const ChatApp = () => {
       }
     };
   } 
+
+  const handleClick = (text) => {
+    Swal.fire({
+      icon: "success",
+      title: "저장",
+      text: `답변을 저장 하시겠습니까?`,
+      width: `300px`,
+      showCancelButton: true,
+      confirmButtonText: "저장",
+      cancelButtonText: "취소",
+      }).then((res) => {
+          if (res.isConfirmed) {
+            setClickedText(text);
+          }
+          else{
+              return 0
+          }
+      });
+  };
+
+  useEffect(() => {
+    const sendData = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/answer', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            nickname: state.nickname,
+            answer: clickedText,
+           }), 
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log('데이터 전송 성공:', data);
+        } else {
+          throw new Error('데이터 전송 실패');
+        }
+      } catch (error) {
+        console.error('에러 발생:', error);
+      }
+    };
+    if (clickedText) {
+      sendData(); 
+    }
+  }, [clickedText]);
 
   const pageVariants = {
     initial: { opacity: 0, x: '100vw' },
@@ -86,7 +139,7 @@ const ChatApp = () => {
               </div>
               <div style={{clear:'both'}}></div>
               {responses[index] ? (
-                  <div className='message ai'>
+                  <div className='message ai' onClick={() => handleClick(responses[index])}>
                     {responses[index]}
                   </div>
                 ) : (
