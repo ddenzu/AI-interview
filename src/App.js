@@ -3,13 +3,18 @@ import React, { useState, useEffect } from 'react';
 import './App.css'
 import ChatApp from './chatApp.js'
 import LoginPage from './login.js'
-import { Routes, Route, Link } from 'react-router-dom';
+import MyAnswer from './myAnswer.js'
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
-
-
+  const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [nickname, setNickname] = useState('');
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
   const getRandomDirection = () => {
     const angle = Math.random() * Math.PI * 2; // 무작위 각도 설정
     const minSpeed = 0.4; // 최저 속도
@@ -76,6 +81,15 @@ function App() {
     exit: { opacity: 0, x: '-100vw' },
     transition: { duration: 0.8 }
   };
+  const handleNavigate = () => {
+    if (nickname.trim() === '') {
+      alert('닉네임을 입력해주세요.'); // 빈 input 값이면 경고창 띄우기
+    } else {
+      setModalOpen(false); // 모달 닫기
+      navigate('/myAnswer',{ state: {nickname} }); // 페이지 이동
+      setNickname('');
+    }
+  };
 
   return (
     <>
@@ -119,17 +133,45 @@ function App() {
                     
                     <Link className='custom-button' to="/login">
                     모의 면접 진행하기
-                  </Link>
+                    </Link>  
+                    <Link  onClick={toggleModal}
+                    className='custom-button stored' to="">
+                    답변 확인하기
+                    </Link>
+                    {modalOpen && (
+                      <div className='modal-overlay'>
+                        <div className='modal'>
+                          <button className='close-button' onClick={toggleModal}>
+                            ×
+                          </button>
+                          <div className='modal-content'>
+                            <input
+                              type="text"
+                              placeholder="Nickname"
+                              value={nickname}
+                              onChange={(e) => setNickname(e.target.value)}
+                              style={{ margin: '10px', padding: '8px', width: '90%' }}
+                            />
+                            <button className='send-btn' type="submit" style={{letterSpacing:'0px'}}
+                            onClick={handleNavigate}
+                            >답변 보기</button>
+                          </div>
+                        </div>
+                      </div>
+                    )}                      
                     <div className='main-imgBox'>
                       <img src="94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif" alt="AI 인터뷰"/>
                     </div>
+
                   </div>
+
                   </motion.div>
                 </div>
                 
             }/>
             <Route path='/ChatApp' element={<ChatApp/>}/>
             <Route path='/login' element={<LoginPage/>}/>
+            <Route path='/myAnswer' element={<MyAnswer/>}/>
           </Routes>
       </div>
       <footer>
@@ -138,5 +180,6 @@ function App() {
     </>
   )
 }
+
 
 export default App

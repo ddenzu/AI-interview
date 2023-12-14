@@ -8,7 +8,9 @@ const LoginPage = () => {
   const [job, setJob] = useState('');
   const [gender, setGender] = useState('');
   const navigate = useNavigate();
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    },[]);
   const handleLogin = async () => {
     try {
       if (!nickname || !job || !gender) {
@@ -77,12 +79,14 @@ const LoginPage = () => {
             onChange={(e) => setJob(e.target.value)}
             style={{ margin: '10px', padding: '8px', width: '90%' }}
           />
-            <input type="radio" id="male" name="gender" value="male"
+          <div className='selectGender'>
+            <input type="radio" id="male" name="gender" value="male" 
             onChange={(e) => setGender(e.target.value)} />
             <label htmlFor="male">Male</label>
             <input type="radio" id="female" name="gender" value="female"
             onChange={(e) => setGender(e.target.value)}/>
             <label htmlFor="female">Female</label>
+          </div>
           <button className='send-btn' type="submit" style={{ margin: '10px', padding: '8px', cursor: 'pointer', width: '90%' }}
           // onClick={()=>{navigate('/chatApp')}}
           >start</button>

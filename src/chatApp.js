@@ -127,8 +127,9 @@ const ChatApp = () => {
       <div className='main-wrap-chat'>
         <div className="chat-container">
           <div className="messages-container">
-            <div className='message ai'>
-              안녕하세요!<br/>저는 인공지능 면접관입니다.<br/>당신의 직업이나 직무가 무엇인지 알려주시겠어요?<br/>그러면 해당 직무에 관련된 첫 번째 면접 질문을 준비해 드릴게요.
+            <div className='message ai notice'>
+              안녕하세요!<br/>저는 인공지능 면접관입니다.<br/>희망하는 직업이나 직무가 무엇인지 알려주세요.<br/>그러면 해당 직무에 관련된 첫 번째 면접 질문을 준비해 드릴게요.
+              <br/><span>답변을 클릭하면 저장할 수 있습니다.</span>
             </div>
             <div className='bot-icon'><FontAwesomeIcon icon={faRobot} /></div>
             <div style={{clear:'both'}}></div>
