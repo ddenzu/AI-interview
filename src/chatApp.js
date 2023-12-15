@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faRobot } from '@fortawesome/free-solid-svg-icons';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLocation } from 'react-router-dom';
 import Swal from "sweetalert2";
 
@@ -16,11 +16,17 @@ const ChatApp = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    handleMessageSubmit()
+    handleMessageSubmit();
     if (messagesStartRef.current) {
       messagesStartRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
   }, [messages]);
+
+  useEffect(() => {
+    if (messagesStartRef.current) {
+      messagesStartRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  }, [responses]);
 
   const handleInputClick = () => {
     const isMobile = window.matchMedia("(max-width: 450px)").matches; // 450px 이하의 모바일에서만 스크롤 조정
@@ -32,7 +38,7 @@ const ChatApp = () => {
   };
 
   const handleMessageSubmit = async () => {
-    if(messages!=''){
+    if(messages.length !== 0){
       try{
         const response = await fetch('http://localhost:8000/interview', {
         method: 'POST',
@@ -46,8 +52,12 @@ const ChatApp = () => {
           job: state.job
         })
         })
-        const data = await response.json();
-        setResponses([...responses, data])
+        if (response.ok) {
+          const data = await response.json(); // json 을 javascript 객체로 변환하는 과정
+          setResponses([...responses, data]);
+        } else {
+          throw new Error('서버 응답 오류');
+        }
       } catch(error){
         console.log(error)
       }
@@ -86,12 +96,8 @@ const ChatApp = () => {
             answer: clickedText,
            }), 
         });
-  
-        if (response.ok) {
-          const data = await response.json();
-          console.log('데이터 전송 성공:', data);
-        } else {
-          throw new Error('데이터 전송 실패');
+        if (!response.ok) {
+          throw new Error('데이터 전송 실패'); // error 객체에 텍스트 삽입
         }
       } catch (error) {
         console.error('에러 발생:', error);
@@ -136,7 +142,12 @@ const ChatApp = () => {
             {messages.map((messages, index) => (
               <>
               <div key={index} className="message">
-                {messages}
+                {messages.split('\n').map((line, lineIndex) => (
+                  <React.Fragment key={lineIndex}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
               </div>
               <div style={{clear:'both'}}></div>
               {responses[index] ? (
@@ -155,14 +166,22 @@ const ChatApp = () => {
             ))}
           </div>
           <div className="input-container">
-            <input
+            <textarea
               type="text"
-              value={inputValue} 
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
               onClick={()=>{handleInputClick()}}
-              onChange={(e) => {setInputValue(e.target.value)} }
+              spellCheck="false"
             />
-            <button onClick={()=>{setMessages([...messages, inputValue]);
-            setInputValue('')}}>Send</button>
+            <button onClick={()=>{
+              if (!inputValue.trim()) {
+                alert('내용을 입력해주세요.');
+                return;
+              }
+              setMessages([...messages, inputValue]);
+              setInputValue('')}}>
+              Send
+            </button>
           </div>
         </div>
       </div>

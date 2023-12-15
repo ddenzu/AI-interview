@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import ChatApp from './chatApp.js'
 import LoginPage from './login.js'
 import MyAnswer from './myAnswer.js'
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion, AnimatePresence } from "framer-motion";
 
 function App() {

@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLocation } from 'react-router-dom';
 
 const MyAnswer = () => {
     const location = useLocation();
     const { state } = location;
     const [answer, setAnswer] = useState([]);
-    // const [dataFetched, setDataFetched] = useState(false);
+
     const pageVariants = {
         initial: { opacity: 0, x: '100vw' },
         animate: { opacity: 1, x: 0 },
@@ -15,29 +15,28 @@ const MyAnswer = () => {
     };
     useEffect(() => {
         window.scrollTo(0, 0);
-        // const showData = async () => {
-        // try {
-        //     const response = await fetch('http://localhost:8000/showAnswer', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({ 
-        //         nickname: state.nickname,
-        //     }), 
-        //     });
-        //     if (response.ok) {
-        //         const data = await response.json();
-        //         console.log(data)
-        //         setAnswer([data.data])
-        //     } else {
-        //         throw new Error('데이터 전송 실패');
-        //     }
-        // } catch (error) {
-        //     console.error('에러 발생:', error);
-        // }
-        // };
-        // showData();
+        const showData = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/showAnswer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                nickname: state.nickname,
+            }), 
+            })
+            if (response.ok) {
+                const data = await response.json();
+                setAnswer(data.answerArray)
+            } else {
+                throw new Error('데이터 전송 실패');
+            }
+        } catch (error) {
+            console.error('에러 발생:', error);
+        }
+        };
+        showData();
     }, []);
 
   return (
@@ -55,12 +54,18 @@ const MyAnswer = () => {
     exit='exit'
     transition='transition'
     style={{ position: 'relative', zIndex: '2' }}>
-      <div className='main-wrap-chat'>
-        {/* {answer[0].map((item, index) => (
-            <div key={index}>
-                <p>{item}</p>
+      <div className='main-wrap-answer'>
+        {answer.length === 0 ? (
+          <div className='no-answer'>
+            저장된 답변이 존재하지 않습니다.
+          </div>
+        ) : (
+          answer.map((answer, index) => (
+            <div className='answerBox' key={index}>
+              {answer}
             </div>
-        ))} */}
+          ))
+        )}
       </div>
       </motion.div>
     </>

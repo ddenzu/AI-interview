@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 
 const LoginPage = () => {
@@ -8,35 +8,31 @@ const LoginPage = () => {
   const [job, setJob] = useState('');
   const [gender, setGender] = useState('');
   const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
     },[]);
+
   const handleLogin = async () => {
     try {
       if (!nickname || !job || !gender) {
         alert('닉네임과 희망 직무를 입력해주세요.');
         return;
       }
-
       const response = await fetch('http://localhost:8000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          nickname: nickname, 
-          job: job,
-          gender: gender }),
-      })
-      .then((response) => {
-        if (response.ok) { // 응답send 하면 true 반환
-          navigate('/chatApp', { state: { nickname, job, gender } });
-          return response.json();
-        }
-        throw new Error('서버 에러');
-      })
+        body: JSON.stringify({ nickname, job, gender }),
+      });
+      if (response.ok) {
+        return navigate('/chatApp', { state: { nickname, job, gender } });
+      } else {
+        throw new Error('서버 응답 오류');
+      }
     } catch (error) {
-      console.error('Error:', error);
+      console.error(error);
     }
   };
 
@@ -87,8 +83,8 @@ const LoginPage = () => {
             onChange={(e) => setGender(e.target.value)}/>
             <label htmlFor="female">Female</label>
           </div>
-          <button className='send-btn' type="submit" style={{ margin: '10px', padding: '8px', cursor: 'pointer', width: '90%' }}
-          // onClick={()=>{navigate('/chatApp')}}
+          <button className='send-btn' type="submit" style={{ 
+          margin: '10px', padding: '8px', cursor: 'pointer', width: '90%' }}
           >start</button>
         </form>
       </div>
