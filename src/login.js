@@ -19,7 +19,7 @@ const LoginPage = () => {
         alert('닉네임과 희망 직무를 입력해주세요.');
         return;
       }
-      const response = await fetch('http://localhost:8000/login', {
+      const response = await fetch('/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,7 +27,13 @@ const LoginPage = () => {
         body: JSON.stringify({ nickname, job, gender }),
       });
       if (response.ok) {
-        return navigate('/chatApp', { state: { nickname, job, gender } });
+        const data = await response.json();
+        if (data === '이미 존재하는 닉네임') {
+          alert('이미 존재하는 닉네임입니다.');
+          setNickname('');
+        } else {
+          return navigate('/chatApp', { state: { nickname, job, gender } });
+        }
       } else {
         throw new Error('서버 응답 오류');
       }

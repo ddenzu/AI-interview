@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faRobot } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "framer-motion";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 
 const ChatApp = () => {
@@ -12,6 +12,7 @@ const ChatApp = () => {
   const [inputValue, setInputValue] = useState('');
   const [responses, setResponses] = useState([]);
   const [clickedText, setClickedText] = useState('');
+  const navigate = useNavigate();
   const messagesStartRef = useRef(null);
 
   useEffect(() => {
@@ -36,11 +37,13 @@ const ChatApp = () => {
       }, 50); 
     }
   };
-
+  const handleEndInterview = () => {
+    navigate('/');
+  };
   const handleMessageSubmit = async () => {
     if(messages.length !== 0){
       try{
-        const response = await fetch('http://localhost:8000/interview', {
+        const response = await fetch('/interview', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -86,7 +89,7 @@ const ChatApp = () => {
   useEffect(() => {
     const sendData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/answer', {
+        const response = await fetch('/answer', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -173,7 +176,7 @@ const ChatApp = () => {
               onClick={()=>{handleInputClick()}}
               spellCheck="false"
             />
-            <button onClick={()=>{
+            <button style={{cursor:'pointer'}} onClick={()=>{
               if (!inputValue.trim()) {
                 alert('내용을 입력해주세요.');
                 return;
@@ -182,6 +185,11 @@ const ChatApp = () => {
               setInputValue('')}}>
               Send
             </button>
+            <div>
+              <button className='end-btn' onClick={handleEndInterview}>
+                면접 종료
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ const MyAnswer = () => {
         window.scrollTo(0, 0);
         const showData = async () => {
         try {
-            const response = await fetch('http://localhost:8000/showAnswer', {
+            const response = await fetch('/showAnswer', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
