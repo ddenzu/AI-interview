@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Katuri';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 html {
   width: 100vw;
   height: 100%;
@@ -5,13 +11,14 @@ html {
 body {
   height: 100%;
   overflow-x: hidden;
-  background-color: #7D71EA;
+  background-color: #FFC75F;
+  /* background-color: rgba(193, 255, 61, 1); */
 }
 .App {
   text-align: center;
   width: 100vw;
   height:100%;
-  background-color:#e0e0fc;
+  background-color: #FAEF9B;
   position: relative;
   overflow: hidden;
   margin: 0;
@@ -29,7 +36,7 @@ body {
 .second-wrap {
   text-align: center;
   padding-top: 10px;
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
   color: #333 ;
   background: transparent ;
   width: 90%;
@@ -44,11 +51,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Katuri';
+  letter-spacing: 2px;
 }
 .second-wrap-1 > h1 {
-  font-size: 2.3rem;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 100;
   color:white;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
 }
 .second-wrap-2{
   width: 70%;
@@ -59,28 +69,34 @@ body {
   background-color: rgba(0, 0, 0, 0.5); 
   border-radius: 10px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: cloud2 2s infinite alternate ease-in-out;
 }
 .second-wrap-2 > p {
-  font-weight: bold; 
+  font-family: 'Katuri';
+  letter-spacing: 1px;
   margin: 0px; 
   font-size: 1rem;
   padding:10px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 .testInfo {
-  width: 75% ;
+  width: 70% ;
   padding: 5px ;
   margin: 15px auto ;
   background-color: white ;
   border-radius: 10px;
-  border:2px solid #7D71EA;
+  border:2px solid #FFC75F ;
 }
 .testInfo > p {
-  font-weight: bold ;
+  font-family: 'Katuri';
+  /* font-weight: bold ; */
   margin: 0px ;
   padding:10px 5px 10px 5px;
-  color:#7D71EA;
+  color:#FFC75F;
   font-size:15px;
+  /* text-shadow: 1px 1px 1px rgba(0,0,0,0.1); */
 }
+
 .main-imgBox {
   margin-top: 50px;
   width: 100% ;
@@ -94,7 +110,7 @@ body {
   max-width: 450px ;
   height: 30vh;
   border-radius:10px;
-  margin-top:20px;
+  margin-top:30px;
 }
 .main-wrap-chat {
   display: flex ;
@@ -112,12 +128,14 @@ body {
   height: 100%;
 }
 .chat-container{
-  width: 70%;
+  width: 75%;
   max-width: 500px ;
   height: 75% ;
   background-color: rgba(52, 53, 65, 0.8); 
-  background-color: rgba(125, 113, 234, 0.5);
-  padding: 10px 5px 10px 15px ;
+  background-color: rgba(255, 150, 113, 0.7);
+  /* background-color: rgba(125, 113, 234, 0.5);
+  background-color: rgba(255, 199, 95, 0.6); */
+  padding: 10px 5px 10px 13px ;
   box-sizing: border-box ;
   border-radius: 10px ;
   border: 2px solid white;
@@ -144,6 +162,8 @@ body {
   align-items: center; 
   margin: 0 auto ;
   background-color: rgba(125, 113, 234, 0.6);
+  background-color: rgba(255, 150, 113, 1);
+  /* background-color: rgba(255, 199, 95, 1); */
   color: white ;
   padding: 10px ;
   border-radius: 20px ;
@@ -159,6 +179,7 @@ body {
   word-wrap: break-word;
   margin-right: 7px;
   max-width: 77%;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 .notice {
   display: inline-block
@@ -187,11 +208,13 @@ body {
   padding:20px ;
   border-radius: 10px ;
   background-color: rgba(125, 113, 234, 0.4);
+  background-color: rgba(255, 199, 95, 0.6);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 2;
 }
 .login > h2 {
   margin: 15px 0 15px 0;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
 }
 .login input {
   padding: 8px ;
@@ -207,18 +230,23 @@ body {
   border-radius: 5px; 
   border: none; 
   background-color: #7D71EA; 
+  background-color: #FFC75F;
+  font-weight: 700;
   color: white;
   letter-spacing:1px;
   margin: 10px; 
   padding: 8px;
   cursor: pointer; 
   width: 90%; 
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
 }
 .end-btn {
   font-size: 14px;
   border-radius: 5px; 
   border: none; 
   background-color: #7D71EA; 
+  background-color: #FFC75F;
   color: white;
   letter-spacing:1px;
   padding: 6px;
@@ -227,16 +255,21 @@ body {
   bottom: -45px;
   right: 10px;
   z-index: 10;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 .send-btn:hover{
   background-color: white;
   color: #7d71ea;
+  color: #FFC75F;
   font-weight: 600;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
 .end-btn:hover{
   background-color: white;
   color: #7d71ea;
+  color: #FFC75F;
   font-weight: 600;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -253,30 +286,44 @@ body {
   width: 90px;
   border-radius: 5px;
   border: 1px solid #7d71ea;
+  border: 1px solid #FFC75F;
   line-height: 24px;
   text-align: center;
   font-weight:bold;
   font-size:13px;
   margin: 0 5px 0 5px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
 .selectGender input[type=radio]+label{
   background-color: #fff;
   color: #7d71ea;
+  color: #FFC75F;
 }
 .selectGender input[type=radio]:checked+label{
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   background-color: #7d71ea;
+  background-color: #FFC75F;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
   color: #fff;
 }
 @media (max-width: 450px) {
   .chat-container {
     height: 50%;
+    width: 80%;
   }
   .message {
     font-size: 13px;
   }
   .login {
     width: 250px;
+  }
+  .testInfo > p {
+    font-weight: bold ;
+    margin: 0px ;
+    padding:10px 5px 10px 5px;
+    color:#7D71EA;
+    color: #FFC75F;
+    font-size:14px;
   }
 }
 .icon {
@@ -305,7 +352,6 @@ body {
   border-radius: 5px ;
   border: none;
   outline: none;
-  background-color: #E0E0FC;
   background-color: white;
   resize: none;
   font-weight: 600;
@@ -315,8 +361,12 @@ body {
   padding: 8px; 
   border-radius: 5px; 
   border: none; 
+  border: 2px solid white;
   background-color: #7D71EA; 
+  background-color: #FFC75F;
+  background-color: #FF9671;
   color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -345,23 +395,26 @@ body {
   font-size: 1.1rem;
   border-radius: 6px;
   text-decoration: none;
-  color: #fff;
-  background-color: #7D71EA ;
+  color: #FFC75F;
+  font-weight: 700;
+  background-color: white;
   border: none;
   cursor: pointer;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 25px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
   transition: background-color 0.3s ease;
 }
 .stored {
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 0.9rem;
-  background-color: #aba5ef;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  background-color: white;
 }
 /* 버튼 호버 효과 */
 .custom-button:hover {
   background-color: white;
-  color: #7d71ea;
+  color: #FFC75F;
   font-weight: 600;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -408,18 +461,14 @@ footer {
   padding:20px ;
   border-radius: 10px ;
   background-color: #e0e0fc;
+  background-color: rgba(250, 239, 155, 1);
 }
 
-/* 모달 내용 */
-.modal-content {
-  /* 원하는 모달 내용의 스타일 */
-}
 .modal-content > input {
   padding: 8px ;
   border-radius: 5px ;
   border: none;
   outline: none;
-  background-color: #E0E0FC;
   background-color: white;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -436,6 +485,7 @@ footer {
 .answerBox {
   width: 60%;
   background-color: rgba(125, 113, 234, 0.6);
+  background-color: rgba(255, 199, 95, 1);
   color: white;
   margin: 20px 40px 20px 40px;
   padding: 20px;
@@ -448,6 +498,7 @@ footer {
 }
 .no-answer{
   background-color: rgba(125, 113, 234, 0.6);
+  background-color: rgba(255, 199, 95, 1);
   color: white;
   margin: 20px 40px 20px 40px;
   padding: 20px;
@@ -456,6 +507,7 @@ footer {
   font-weight: 600;
   letter-spacing: 1px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
   animation: cloud 2s infinite alternate ease-in-out;
 }
 @keyframes cloud {
@@ -466,13 +518,21 @@ footer {
     transform: translateY(20px);
   }
 }
+@keyframes cloud2 {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
 @media (max-width: 379px) {
   .wave {
     top: 100px;
   }
   .main-wrap {
     height:100vh;
-    background: linear-gradient(#7D71EA, #7D71EA 16%, #e0e0fc 16%);
+    background: linear-gradient(#FFC75F, #FFC75F 16%, #FAEF9B 16%);
   }
 }
 @media (max-height: 850px) {
@@ -487,7 +547,7 @@ footer {
   }
   .main-wrap {
     height:100vh;
-    background: linear-gradient(#7D71EA, #7D71EA 14%, #e0e0fc 14%);
+    background: linear-gradient(#FFC75F, #FFC75F 14%, #FAEF9B 14%);
   }
 }
 
@@ -499,7 +559,7 @@ footer {
   }
   .main-wrap {
     height:100vh;
-    background: linear-gradient(#7D71EA, #7D71EA 9%, #e0e0fc 9%);
+    background: linear-gradient(#FFC75F, #FFC75F 9%, #FAEF9B 9%);
   } 
 } 
 

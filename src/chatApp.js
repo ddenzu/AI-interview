@@ -33,7 +33,7 @@ const ChatApp = () => {
     const isMobile = window.matchMedia("(max-width: 450px)").matches; // 450px 이하의 모바일에서만 스크롤 조정
     if (isMobile) {
       setTimeout(() => {
-        window.scrollTo({ top: 160, behavior: 'smooth' });
+        window.scrollTo({ top: 165, behavior: 'smooth' });
       }, 50); 
     }
   };
@@ -85,6 +85,13 @@ const ChatApp = () => {
           }
       });
   };
+  const handleClick2 = () => {
+    Swal.fire({
+      icon: "warning",
+      text: `내용을 입력해주세요.`,
+      width: `250px`,
+      })
+  };
 
   useEffect(() => {
     const sendData = async () => {
@@ -122,7 +129,7 @@ const ChatApp = () => {
     <>
     <div className="wave" style={{position: 'absolute', width: '100%', top: '0', zIndex: '0' }}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#7D71EA" fillOpacity="1" d="M0,224L40,208C80,192,160,160,240,149.3C320,139,400,149,480,165.3C560,181,640,203,720,197.3C800,192,880,160,960,138.7C1040,117,1120,107,1200,117.3C1280,128,1360,160,1400,176L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+        <path fill="#FFC75F" fillOpacity="1" d="M0,224L40,208C80,192,160,160,240,149.3C320,139,400,149,480,165.3C560,181,640,203,720,197.3C800,192,880,160,960,138.7C1040,117,1120,107,1200,117.3C1280,128,1360,160,1400,176L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
       </svg>
     </div>
     <motion.div
@@ -177,8 +184,9 @@ const ChatApp = () => {
               spellCheck="false"
             />
             <button style={{cursor:'pointer'}} onClick={()=>{
-              if (!inputValue.trim()) {
-                alert('내용을 입력해주세요.');
+              if (inputValue.trim() === '') {
+                // window.alert('내용을 입력해주세요.');
+                handleClick2()
                 return;
               }
               setMessages([...messages, inputValue]);
