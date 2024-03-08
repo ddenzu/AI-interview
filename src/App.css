@@ -89,7 +89,6 @@ body {
 }
 .testInfo > p {
   font-family: 'Katuri';
-  /* font-weight: bold ; */
   margin: 0px ;
   padding:10px 5px 10px 5px;
   color:#FFC75F;
@@ -131,10 +130,7 @@ body {
   width: 75%;
   max-width: 500px ;
   height: 75% ;
-  background-color: rgba(52, 53, 65, 0.8); 
-  background-color: rgba(255, 150, 113, 0.7);
-  /* background-color: rgba(125, 113, 234, 0.5);
-  background-color: rgba(255, 199, 95, 0.6); */
+  background-color: rgba(255, 199, 95, 1);
   padding: 10px 5px 10px 13px ;
   box-sizing: border-box ;
   border-radius: 10px ;
@@ -161,9 +157,7 @@ body {
   justify-content: center ;
   align-items: center; 
   margin: 0 auto ;
-  background-color: rgba(125, 113, 234, 0.6);
   background-color: rgba(255, 150, 113, 1);
-  /* background-color: rgba(255, 199, 95, 1); */
   color: white ;
   padding: 10px ;
   border-radius: 20px ;
@@ -193,12 +187,12 @@ body {
 }
 .ai {
   float: left;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.55);
   margin-bottom: 20px;
   cursor: pointer;
 }
 .ai:hover {
-  background-color: rgba(0, 0, 0, 0.7); 
+  background-color: rgba(0, 0, 0, 0.75); 
 }
 .login {
   color: white;
@@ -207,8 +201,7 @@ body {
   max-height: 400px ;
   padding:20px ;
   border-radius: 10px ;
-  background-color: rgba(125, 113, 234, 0.4);
-  background-color: rgba(255, 199, 95, 0.6);
+  background-color: rgba(255, 199, 95, 0.65);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 2;
 }
@@ -221,7 +214,6 @@ body {
   border-radius: 5px ;
   border: none;
   outline: none;
-  background-color: #E0E0FC;
   background-color: white;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -229,7 +221,6 @@ body {
   font-size: 16px;
   border-radius: 5px; 
   border: none; 
-  background-color: #7D71EA; 
   background-color: #FFC75F;
   font-weight: 700;
   color: white;
@@ -245,7 +236,6 @@ body {
   font-size: 14px;
   border-radius: 5px; 
   border: none; 
-  background-color: #7D71EA; 
   background-color: #FFC75F;
   color: white;
   letter-spacing:1px;
@@ -260,7 +250,6 @@ body {
 }
 .send-btn:hover{
   background-color: white;
-  color: #7d71ea;
   color: #FFC75F;
   font-weight: 600;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -268,7 +257,6 @@ body {
 }
 .end-btn:hover{
   background-color: white;
-  color: #7d71ea;
   color: #FFC75F;
   font-weight: 600;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -285,23 +273,21 @@ body {
   height: 24px;
   width: 90px;
   border-radius: 5px;
-  border: 1px solid #7d71ea;
   border: 1px solid #FFC75F;
   line-height: 24px;
   text-align: center;
   font-weight:bold;
   font-size:13px;
   margin: 0 5px 0 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
 .selectGender input[type=radio]+label{
   background-color: #fff;
-  color: #7d71ea;
   color: #FFC75F;
 }
 .selectGender input[type=radio]:checked+label{
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  background-color: #7d71ea;
   background-color: #FFC75F;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
   color: #fff;
@@ -321,7 +307,6 @@ body {
     font-weight: bold ;
     margin: 0px ;
     padding:10px 5px 10px 5px;
-    color:#7D71EA;
     color: #FFC75F;
     font-size:14px;
   }
@@ -362,8 +347,6 @@ body {
   border-radius: 5px; 
   border: none; 
   border: 2px solid white;
-  background-color: #7D71EA; 
-  background-color: #FFC75F;
   background-color: #FF9671;
   color: white;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
@@ -460,7 +443,6 @@ footer {
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
   padding:20px ;
   border-radius: 10px ;
-  background-color: #e0e0fc;
   background-color: rgba(250, 239, 155, 1);
 }
 
@@ -484,7 +466,6 @@ footer {
 }
 .answerBox {
   width: 60%;
-  background-color: rgba(125, 113, 234, 0.6);
   background-color: rgba(255, 199, 95, 1);
   color: white;
   margin: 20px 40px 20px 40px;
@@ -497,7 +478,6 @@ footer {
   animation: cloud 2s infinite alternate ease-in-out;
 }
 .no-answer{
-  background-color: rgba(125, 113, 234, 0.6);
   background-color: rgba(255, 199, 95, 1);
   color: white;
   margin: 20px 40px 20px 40px;
