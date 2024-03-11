@@ -177,6 +177,7 @@ const ChatApp = () => {
           </div>
           <div className="input-container">
             <textarea
+              style={{fontWeight:'bold'}}
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
