@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faRobot } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "framer-motion";
 import { useLocation, useNavigate } from 'react-router-dom';
-import Swal from "sweetalert2";
+import {pageVariants} from "./utils/animations.js"
+import { showAlert, askToSaveAnswer } from './utils/alert.js';
 
 const ChatApp = () => {
   const location = useLocation();
@@ -37,13 +38,21 @@ const ChatApp = () => {
       }, 50); 
     }
   };
+  const handleSendMessage = () => {
+    if (inputValue.trim() === '') {
+      showAlert("warning", "내용을 입력해주세요.", "250px");
+      return;
+    }
+    setMessages([...messages, inputValue]);
+    setInputValue('');
+  };
   const handleEndInterview = () => {
     navigate('/');
   };
   const handleMessageSubmit = async () => {
     if(messages.length !== 0){
       try{
-        const response = await fetch('/interview', {
+        const response = await fetch('http://192.168.219.107:8080/interview', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -67,36 +76,10 @@ const ChatApp = () => {
     };
   } 
 
-  const handleClick = (text) => {
-    Swal.fire({
-      icon: "success",
-      title: "저장",
-      text: `답변을 저장 하시겠습니까?`,
-      width: `300px`,
-      showCancelButton: true,
-      confirmButtonText: "저장",
-      cancelButtonText: "취소",
-      }).then((res) => {
-          if (res.isConfirmed) {
-            setClickedText(text);
-          }
-          else{
-              return 0
-          }
-      });
-  };
-  const handleClick2 = () => {
-    Swal.fire({
-      icon: "warning",
-      text: `내용을 입력해주세요.`,
-      width: `250px`,
-      })
-  };
-
   useEffect(() => {
     const sendData = async () => {
       try {
-        const response = await fetch('/answer', {
+        const response = await fetch('http://192.168.219.107:8080/answer', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -117,13 +100,6 @@ const ChatApp = () => {
       sendData(); 
     }
   }, [clickedText]);
-
-  const pageVariants = {
-    initial: { opacity: 0, x: '100vw' },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: '-100vw' },
-    transition: { duration: 0.8 }
-  };
 
   return (
     <>
@@ -161,7 +137,8 @@ const ChatApp = () => {
               </div>
               <div style={{clear:'both'}}></div>
               {responses[index] ? (
-                  <div className='message ai' onClick={() => handleClick(responses[index])}>
+                  <div className='message ai' onClick={() => 
+                  askToSaveAnswer (responses[index], setClickedText)}>
                     {responses[index]}
                   </div>
                 ) : (
@@ -184,14 +161,7 @@ const ChatApp = () => {
               onClick={()=>{handleInputClick()}}
               spellCheck="false"
             />
-            <button style={{cursor:'pointer'}} onClick={()=>{
-              if (inputValue.trim() === '') {
-                // window.alert('내용을 입력해주세요.');
-                handleClick2()
-                return;
-              }
-              setMessages([...messages, inputValue]);
-              setInputValue('')}}>
+            <button style={{cursor:'pointer'}} onClick={{handleSendMessage}}>
               Send
             </button>
             <div>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
-import Swal from "sweetalert2";
+import {pageVariants} from "./utils/animations.js"
+import { showAlert } from './utils/alert.js';
 
 const LoginPage = () => {
   const [nickname, setNickname] = useState('');
@@ -11,25 +12,15 @@ const LoginPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    },[]);
-
-  const handleClick2 = (text) => {
-    Swal.fire({
-      icon: "warning",
-      text: text,
-      width: `250px`,
-      fontSize:'14px',
-      })
-  };
+  },[]);
 
   const handleLogin = async () => {
     try {
       if (!nickname || !job || !gender) {
-        // window.alert('닉네임과 희망 직무를 입력해주세요.');
-        handleClick2('닉네임과 희망 직무를 입력해주세요.');
+        showAlert("warning", `닉네임과 희망 직무를 입력해주세요.`, "250px")
         return;
       }
-      const response = await fetch('/login', {
+      const response = await fetch('http://192.168.219.107:8080/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,8 +30,7 @@ const LoginPage = () => {
       if (response.ok) {
         const data = await response.json();
         if (data === '이미 존재하는 닉네임') {
-          // window.alert('이미 존재하는 닉네임입니다.');
-          handleClick2('이미 존재하는 닉네임 입니다.');
+          showAlert("warning", '이미 존재하는 닉네임 입니다.', "250px")
           setNickname('');
           return
         } else {
@@ -54,12 +44,6 @@ const LoginPage = () => {
     }
   };
 
-  const pageVariants = {
-    initial: { opacity: 0, x: '100vw' },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: '-100vw' },
-    transition: { duration: 0.8 }
-  };
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
       <div className="wave" style={{position: 'absolute', top: '0', zIndex: '1' }}>

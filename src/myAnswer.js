@@ -1,23 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { useLocation } from 'react-router-dom';
+import {pageVariants} from "./utils/animations.js"
 
 const MyAnswer = () => {
     const location = useLocation();
     const { state } = location;
     const [answer, setAnswer] = useState([]);
 
-    const pageVariants = {
-        initial: { opacity: 0, x: '100vw' },
-        animate: { opacity: 1, x: 0 },
-        exit: { opacity: 0, x: '-100vw' },
-        transition: { duration: 0.8 }
-    };
     useEffect(() => {
         window.scrollTo(0, 0);
         const showData = async () => {
         try {
-            const response = await fetch('/showAnswer', {
+            const response = await fetch('http://192.168.219.107:8080/showAnswer', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
