@@ -16,14 +16,14 @@ function App() {
     setModalOpen(!modalOpen);
   };
 
-  useCircleAnimation();
+  useCircleAnimation(); // 배경 애니메이션 
 
-  const handleNavigate = () => {
+  const storedAnswer = () => {
     if (nickname.trim() === '') {
       showAlert("warning", `닉네임을 입력해주세요.`, "250px")
     } else {
-      setModalOpen(false); // 모달 닫기
-      navigate('/myAnswer',{ state: {nickname} }); // 페이지 이동
+      setModalOpen(false); 
+      navigate('/myAnswer',{ state: {nickname} }); 
       setNickname('');
     }
   };
@@ -90,7 +90,7 @@ function App() {
                               style={{ margin: '10px', padding: '8px', width: '90%' }}
                             />
                             <button className='send-btn' type="submit" style={{letterSpacing:'0px'}}
-                            onClick={handleNavigate}
+                            onClick={storedAnswer}
                             >답변 보기</button>
                           </div>
                         </div>

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useLocation, useNavigate } from 'react-router-dom';
 import {pageVariants} from "./utils/animations.js"
 import { showAlert, askToSaveAnswer } from './utils/alert.js';
+import { submitMessage, sendAnswer } from './utils/dataHandler'; 
 
 const ChatApp = () => {
   const location = useLocation();
@@ -16,19 +17,37 @@ const ChatApp = () => {
   const navigate = useNavigate();
   const messagesStartRef = useRef(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    handleMessageSubmit();
-    if (messagesStartRef.current) {
-      messagesStartRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  const handleSendAnswer = async () => { // db에 answer 저장
+    if (!clickedText) return;
+    try {
+      await sendAnswer(state.nickname, clickedText); // fetch
+    } catch (error) {
+      console.error('에러 발생:', error);
+      showAlert("error", "서버 에러", "250px");
     }
-  }, [messages]);
+  };
 
-  useEffect(() => {
-    if (messagesStartRef.current) {
-      messagesStartRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  const handleSubmitMessage = async () => { // open ai 에게 message 전달
+    window.scrollTo(0, 0);
+    if (messages.length !== 0) {
+      try {
+        const data = await submitMessage(messages, responses, state.nickname, state.job);// fetch
+        setResponses([...responses, data]);
+      } catch (error) {
+        console.log(error);
+        showAlert("error", "서버 에러", "250px");
+      }
     }
-  }, [responses]);
+  } 
+
+  const handleSendMessage = () => {
+    if (inputValue.trim() === '') {
+      showAlert("warning", "내용을 입력해주세요.", "250px");
+      return;
+    }
+    setMessages([...messages, inputValue]);
+    setInputValue('');
+  };
 
   const handleInputClick = () => {
     const isMobile = window.matchMedia("(max-width: 450px)").matches; // 450px 이하의 모바일에서만 스크롤 조정
@@ -38,67 +57,28 @@ const ChatApp = () => {
       }, 50); 
     }
   };
-  const handleSendMessage = () => {
-    if (inputValue.trim() === '') {
-      showAlert("warning", "내용을 입력해주세요.", "250px");
-      return;
+
+  const scrollToEnd = () => {
+    if (messagesStartRef.current) {
+      messagesStartRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
-    setMessages([...messages, inputValue]);
-    setInputValue('');
   };
+
   const handleEndInterview = () => {
     navigate('/');
   };
-  const handleMessageSubmit = async () => {
-    if(messages.length !== 0){
-      try{
-        const response = await fetch('http://192.168.219.107:8080/interview', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userMessages: messages,
-          assistantMessages: responses,
-          nickname: state.nickname,
-          job: state.job
-        })
-        })
-        if (response.ok) {
-          const data = await response.json(); // json 을 javascript 객체로 변환하는 과정
-          setResponses([...responses, data]);
-        } else {
-          throw new Error('서버 응답 오류');
-        }
-      } catch(error){
-        console.log(error)
-      }
-    };
-  } 
 
   useEffect(() => {
-    const sendData = async () => {
-      try {
-        const response = await fetch('http://192.168.219.107:8080/answer', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ 
-            nickname: state.nickname,
-            answer: clickedText,
-           }), 
-        });
-        if (!response.ok) {
-          throw new Error('데이터 전송 실패'); // error 객체에 텍스트 삽입
-        }
-      } catch (error) {
-        console.error('에러 발생:', error);
-      }
-    };
-    if (clickedText) {
-      sendData(); 
-    }
+    handleSubmitMessage();
+    scrollToEnd()
+  }, [messages]);
+
+  useEffect(() => {
+    scrollToEnd()
+  }, [responses]);
+
+  useEffect(() => {
+    handleSendAnswer();
   }, [clickedText]);
 
   return (
@@ -161,7 +141,7 @@ const ChatApp = () => {
               onClick={()=>{handleInputClick()}}
               spellCheck="false"
             />
-            <button style={{cursor:'pointer'}} onClick={{handleSendMessage}}>
+            <button style={{cursor:'pointer'}} onClick={handleSendMessage}>
               Send
             </button>
             <div>

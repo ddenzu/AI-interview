@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
-import {pageVariants} from "./utils/animations.js"
+import { pageVariants } from "./utils/animations.js"
 import { showAlert } from './utils/alert.js';
+import { login } from './utils/dataHandler'; 
 
 const LoginPage = () => {
   const [nickname, setNickname] = useState('');
@@ -14,33 +15,22 @@ const LoginPage = () => {
     window.scrollTo(0, 0);
   },[]);
 
-  const handleLogin = async () => {
+  const handleLogin = async () => { 
+    if (!nickname || !job || !gender) {
+      showAlert("warning", `닉네임과 희망 직무를 입력해주세요.`, "250px");
+      return;
+    }
     try {
-      if (!nickname || !job || !gender) {
-        showAlert("warning", `닉네임과 희망 직무를 입력해주세요.`, "250px")
-        return;
-      }
-      const response = await fetch('http://192.168.219.107:8080/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ nickname, job, gender }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        if (data === '이미 존재하는 닉네임') {
-          showAlert("warning", '이미 존재하는 닉네임 입니다.', "250px")
-          setNickname('');
-          return
-        } else {
-          return navigate('/chatApp', { state: { nickname, job, gender } });
-        }
+      const data = await login(nickname, job, gender); // fetch
+      if (data === '이미 존재하는 닉네임') {
+        showAlert("warning", '이미 존재하는 닉네임 입니다.', "250px");
+        setNickname('');
       } else {
-        throw new Error('서버 응답 오류');
+        navigate('/chatApp', { state: { nickname, job, gender } });
       }
     } catch (error) {
       console.error(error);
+      showAlert("error", "서버 에러", "250px");
     }
   };
 

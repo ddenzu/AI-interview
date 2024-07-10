@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { useLocation } from 'react-router-dom';
+import { showAlert } from './utils/alert.js';
 import {pageVariants} from "./utils/animations.js"
+import { fetchAnswers } from './utils/dataHandler'; 
 
 const MyAnswer = () => {
     const location = useLocation();
@@ -10,28 +12,16 @@ const MyAnswer = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        const showData = async () => {
-        try {
-            const response = await fetch('http://192.168.219.107:8080/showAnswer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 
-                nickname: state.nickname,
-            }), 
-            })
-            if (response.ok) {
-                const data = await response.json();
-                setAnswer(data.answerArray)
-            } else {
-                throw new Error('데이터 전송 실패');
-            }
-        } catch (error) {
+        const showData = async () => { // answer 확인
+          try {
+            const data = await fetchAnswers(state.nickname); // fetch
+            setAnswer(data);
+          } catch (error) {
             console.error('에러 발생:', error);
-        }
+            showAlert("error", "서버 에러", "250px");
+          }
         };
-        showData();
+      showData();
     }, []);
 
   return (
@@ -64,7 +54,6 @@ const MyAnswer = () => {
       </div>
       </motion.div>
     </>
-
   );
 };
 
