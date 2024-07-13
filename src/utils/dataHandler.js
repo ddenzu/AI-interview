@@ -1,5 +1,5 @@
 //fetch 함수
-const URL = 'http://192.168.219.107:8080';
+const URL = '';
 
 const apiRequest = async (endpoint, body) => {
     const response = await fetch(`${URL}${endpoint}`, {

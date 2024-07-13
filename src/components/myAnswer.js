@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { useLocation } from 'react-router-dom';
-import { showAlert } from './utils/alert.js';
-import {pageVariants} from "./utils/animations.js"
-import { fetchAnswers } from './utils/dataHandler'; 
+import { showAlert } from '../utils/alert.js';
+import {pageVariants} from "../utils/animations.js"
+import { fetchAnswers } from '../utils/dataHandler.js'; 
 
 const MyAnswer = () => {
     const location = useLocation();
@@ -52,7 +52,7 @@ const MyAnswer = () => {
           ))
         )}
       </div>
-      </motion.div>
+    </motion.div>
     </>
   );
 };

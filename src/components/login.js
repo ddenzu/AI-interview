@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
-import { pageVariants } from "./utils/animations.js"
-import { showAlert } from './utils/alert.js';
-import { login } from './utils/dataHandler'; 
+import { pageVariants } from "../utils/animations.js"
+import { showAlert } from '../utils/alert.js';
+import { login } from '../utils/dataHandler.js'; 
 
 const LoginPage = () => {
   const [nickname, setNickname] = useState('');
   const [job, setJob] = useState('');
   const [gender, setGender] = useState('');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  },[]);
 
   const handleLogin = async () => { 
     if (!nickname || !job || !gender) {
@@ -34,6 +30,10 @@ const LoginPage = () => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
       <div className="wave" style={{position: 'absolute', top: '0', zIndex: '1' }}>
@@ -49,7 +49,6 @@ const LoginPage = () => {
       exit='exit'
       transition='transition'
       style={{ position: 'relative', zIndex: '2'}}>
-
       <div className='login'>
         <h2>시작하기 전에 !</h2>
         <form onSubmit={(e) => { e.preventDefault();handleLogin();}}>

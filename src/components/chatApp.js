@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faRobot } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "framer-motion";
 import { useLocation, useNavigate } from 'react-router-dom';
-import {pageVariants} from "./utils/animations.js"
-import { showAlert, askToSaveAnswer } from './utils/alert.js';
-import { submitMessage, sendAnswer } from './utils/dataHandler'; 
+import {pageVariants} from "../utils/animations.js"
+import { showAlert, askToSaveAnswer } from '../utils/alert.js';
+import { submitMessage, sendAnswer } from '../utils/dataHandler.js'; 
 
 const ChatApp = () => {
   const location = useLocation();
@@ -154,7 +154,6 @@ const ChatApp = () => {
       </div>
       </motion.div>
     </>
-
   );
 };
 
