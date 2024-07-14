@@ -25,7 +25,7 @@ export const fetchAnswers = async (nickname) => {
     return data.answerArray;
 };
 
-export const submitMessage = async (messages, responses, nickname, job) => {
+export const sendMessage = async (messages, responses, nickname, job) => {
     const data = await apiRequest('/interview', {
         userMessages: messages,
         assistantMessages: responses,
@@ -35,7 +35,7 @@ export const submitMessage = async (messages, responses, nickname, job) => {
     return data;
 };
 
-export const sendAnswer = async (nickname, answer) => {
+export const sendAnswer = async (nickname, answer) => { // 답변 저장
     const data = await apiRequest('/answer', { nickname, answer });
     return data;
 };

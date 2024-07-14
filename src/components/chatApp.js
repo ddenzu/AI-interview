@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Wave } from './modal.js';
 import {pageVariants} from "../utils/animations.js"
 import { showAlert, askToSaveAnswer } from '../utils/alert.js';
-import { submitMessage, sendAnswer } from '../utils/dataHandler.js'; 
+import { sendMessage, sendAnswer } from '../utils/dataHandler.js'; 
 
 const ChatApp = () => {
   const location = useLocation();
@@ -18,7 +18,7 @@ const ChatApp = () => {
   const navigate = useNavigate();
   const messagesStartRef = useRef(null);
 
-  const handleSendAnswer = async () => { // db에 answer 저장
+  const storeAnswer = async () => { // db에 answer 저장
     if (!clickedText) return;
     try {
       await sendAnswer(state.nickname, clickedText); // fetch
@@ -28,11 +28,11 @@ const ChatApp = () => {
     }
   };
 
-  const handleSubmitMessage = async () => { // open ai 에게 message 전달
+  const sendToOpenAI = async () => { // open ai 에게 message 전달
     window.scrollTo(0, 0);
     if (messages.length !== 0) {
       try {
-        const data = await submitMessage(messages, responses, state.nickname, state.job);// fetch
+        const data = await sendMessage(messages, responses, state.nickname, state.job);// fetch
         setResponses([...responses, data]);
       } catch (error) {
         console.log(error);
@@ -50,7 +50,7 @@ const ChatApp = () => {
     setInputValue('');
   };
 
-  const handleInputClick = () => {
+  const scrollMobileView = () => {
     const isMobile = window.matchMedia("(max-width: 450px)").matches; // 450px 이하의 모바일에서만 스크롤 조정
     if (isMobile) {
       setTimeout(() => {
@@ -65,12 +65,12 @@ const ChatApp = () => {
     }
   };
 
-  const handleEndInterview = () => {
+  const endInterview = () => {
     navigate('/');
   };
 
   useEffect(() => {
-    handleSubmitMessage();
+    sendToOpenAI();
     scrollToEnd()
   }, [messages]);
 
@@ -79,7 +79,7 @@ const ChatApp = () => {
   }, [responses]);
 
   useEffect(() => {
-    handleSendAnswer();
+    storeAnswer();
   }, [clickedText]);
 
   return (
@@ -135,14 +135,14 @@ const ChatApp = () => {
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onClick={()=>{handleInputClick()}}
+              onClick={()=>{scrollMobileView()}}
               spellCheck="false"
             />
             <button style={{cursor:'pointer'}} onClick={handleSendMessage}>
               Send
             </button>
             <div>
-              <button className='end-btn' onClick={handleEndInterview}>
+              <button className='end-btn' onClick={endInterview}>
                 면접 종료
               </button>
             </div>
