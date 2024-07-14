@@ -512,7 +512,7 @@ footer {
   }
   .main-wrap {
     height:100vh;
-    background: linear-gradient(#FFC75F, #FFC75F 16%, #FAEF9B 16%);
+    background: linear-gradient(#FFC75F, #FFC75F 100px, #FAEF9B 100px);
   }
 }
 @media (max-height: 850px) {
@@ -527,7 +527,7 @@ footer {
   }
   .main-wrap {
     height:100vh;
-    background: linear-gradient(#FFC75F, #FFC75F 14%, #FAEF9B 14%);
+    background: linear-gradient(#FFC75F, #FFC75F 100px, #FAEF9B 100px);
   }
 }
 
@@ -539,7 +539,7 @@ footer {
   }
   .main-wrap {
     height:100vh;
-    background: linear-gradient(#FFC75F, #FFC75F 9%, #FAEF9B 9%);
+    background: linear-gradient(#FFC75F, #FFC75F 60px, #FAEF9B 60px);
   } 
 } 
 
