@@ -78,7 +78,8 @@ function App() {
                     storedAnswer={storedAnswer}
                   />                  
                   <div className='main-imgBox'>
-                    <img src="94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48.gif" alt="AI 인터뷰"/>
+                    <img src="94132137-7d4fc100-fe7c-11ea-8512-69f90cb65e48-ezgif.com-optiwebp.webp" alt="AI 인터뷰"
+                    loading='lazy'/>
                   </div>
                 </div>
                 </motion.div>
