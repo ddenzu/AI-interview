@@ -15,7 +15,7 @@ export const Modal = ({ modalOpen, toggleModal, nickname, setNickname, storedAns
                 placeholder="Nickname"
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
-                style={{ margin: '10px', padding: '8px', width: '90%' }}
+                style={{ margin: '10px', width: '90%' }}
               />
               <button 
                 className='send-btn' 

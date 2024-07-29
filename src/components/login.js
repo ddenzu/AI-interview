@@ -54,14 +54,14 @@ const LoginPage = () => {
             placeholder="Nickname"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
-            style={{ margin: '10px', padding: '8px', width: '90%' }}
+            style={{ margin: '10px', width: '90%' }}
           />
           <input
             type="text"
             placeholder="Job"
             value={job}
             onChange={(e) => setJob(e.target.value)}
-            style={{ margin: '10px', padding: '8px', width: '90%' }}
+            style={{ margin: '10px', width: '90%' }}
           />
           <div className='selectGender'>
             <input type="radio" id="male" name="gender" value="male" 
@@ -71,8 +71,7 @@ const LoginPage = () => {
             onChange={(e) => setGender(e.target.value)}/>
             <label htmlFor="female">여성</label>
           </div>
-          <button className='send-btn' type="submit" style={{ 
-          margin: '10px', padding: '8px', cursor: 'pointer', width: '90%' }}
+          <button className='send-btn' type="submit" style={{width: '90%' }}
           >시작</button>
         </form>
       </div>
