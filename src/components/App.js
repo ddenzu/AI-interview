@@ -1,33 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../App.css'
 import ChatApp from './chatApp.js'
 import LoginPage from './login.js'
 import MyAnswer from './myAnswer.js'
 import { Modal, Wave } from './modal.js';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { pageVariants, useCircleAnimation } from "../utils/animations.js"
-import { showAlert } from '../utils/alert.js';
+import { useModal } from '../hooks/useModal';
 
 function App() {
-  const navigate = useNavigate();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [nickname, setNickname] = useState('');
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
-  };
+  const {
+    modalOpen,
+    nickname,
+    setNickname,
+    toggleModal,
+    storedAnswer
+  } = useModal();
 
   useCircleAnimation(); // 배경 애니메이션 
-
-  const storedAnswer = () => {
-    if (nickname.trim() === '') {
-      showAlert("warning", `닉네임을 입력해주세요.`, "250px")
-    } else {
-      setModalOpen(false); 
-      navigate('/myAnswer',{ state: {nickname} }); 
-      setNickname('');
-    }
-  };
 
   return (
     <>
