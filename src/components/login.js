@@ -19,12 +19,15 @@ const LoginPage = () => {
     }
     try {
       const data = await login(nickname, job, gender); // fetch
-      if (data === '이미 존재하는 닉네임') {
-        showAlert("warning", '이미 존재하는 닉네임 입니다.', "250px");
-        setNickname('');
-      } else {
-        navigate('/chatApp', { state: { nickname, job, gender } });
-      }
+        if (data === 409){
+          showAlert("warning", '이미 존재하는 닉네임 입니다.', "250px");
+          setNickname('');
+        } else if (data === 500){
+          showAlert("error", "서버 에러", "250px");
+          setNickname('');
+        } else {
+          navigate('/chatApp', { state: { nickname, job, gender } });
+        }
     } catch (error) {
       console.error(error);
       showAlert("error", "서버 에러", "250px");
