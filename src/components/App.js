@@ -3,7 +3,8 @@ import '../App.css'
 import ChatApp from './chatApp.js'
 import LoginPage from './login.js'
 import MyAnswer from './myAnswer.js'
-import { Modal, Wave } from './modal.js';
+import { Modal} from './ui/modal.js';
+import { Wave } from './ui/wave.js';
 import { Routes, Route, Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { pageVariants, useCircleAnimation } from "../utils/animations.js"

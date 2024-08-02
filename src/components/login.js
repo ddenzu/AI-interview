@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import { Wave } from './modal.js';
+import { Wave } from './ui/wave.js';
 import { pageVariants } from "../utils/animations.js"
 import {useLogin} from '../hooks/useLogin';
 

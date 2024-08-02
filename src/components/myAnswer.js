@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import { Wave } from './modal.js';
+import { Wave } from './ui/wave.js';
 import { useLocation } from 'react-router-dom';
 import {pageVariants} from "../utils/animations.js"
 import {useAnswers} from '../hooks/useAnswer';
