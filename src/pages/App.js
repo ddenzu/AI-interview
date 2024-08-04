@@ -3,12 +3,12 @@ import '../App.css'
 import ChatApp from './chatApp.js'
 import LoginPage from './login.js'
 import MyAnswer from './myAnswer.js'
-import { Modal} from './ui/modal.js';
-import { Wave } from './ui/wave.js';
+import { Modal} from '../components/modal.js';
+import { Wave } from '../components/wave.js';
 import { Routes, Route, Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { pageVariants, useCircleAnimation } from "../utils/animations.js"
-import { useModal } from '../hooks/useModal';
+import { useModal } from '../hooks/useModal.js';
 
 function App() {
   const {

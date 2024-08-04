@@ -2,10 +2,10 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faRobot } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "framer-motion";
-import { Wave } from './ui/wave.js';
-import {pageVariants} from "../utils/animations.js"
+import { Wave } from '../components/wave.js';
+import { pageVariants } from "../utils/animations.js"
 import { askToSaveAnswer } from '../utils/alert.js';
-import { useChat } from '../hooks/useChat';
+import { useChat } from '../hooks/useChat.js';
 
 const ChatApp = () => {
   const {

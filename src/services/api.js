@@ -39,7 +39,7 @@ export const sendMessage = async (messages, responses, nickname, job) => {
     return data;
 };
 
-export const sendAnswer = async (nickname, answer) => { // 답변 저장
+export const sendAnswer = async (nickname, answer) => { 
     const data = await apiRequest('/answer', 'POST',{ nickname, answer });
     return data;
 };

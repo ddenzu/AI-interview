@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import { Wave } from './ui/wave.js';
+import { Wave } from '../components/wave.js';
 import { useLocation } from 'react-router-dom';
-import {pageVariants} from "../utils/animations.js"
-import {useAnswers} from '../hooks/useAnswer';
+import { pageVariants } from "../utils/animations.js"
+import { useAnswers } from '../hooks/useAnswer.js';
 
 const MyAnswer = () => {
     const location = useLocation();

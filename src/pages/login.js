@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import { Wave } from './ui/wave.js';
+import { Wave } from '../components/wave.js';
 import { pageVariants } from "../utils/animations.js"
-import {useLogin} from '../hooks/useLogin';
+import { useLogin } from '../hooks/useLogin.js';
 
 const LoginPage = () => {
   const {
