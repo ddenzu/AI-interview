@@ -28,9 +28,14 @@ Node.js + Express + React + MySQL + openAI API
 - 사용자의 직업에 해당하는 면접 예상 질문
 - 사용자의 답변에 대한 피드백
   
+![Desktop2024 03 17-00 03 32 07online-video-cutter com-ezgif com-resize](https://github.com/user-attachments/assets/1275b231-2e88-4a67-87be-9f2ed769a42b)
+
+
 #### 질문과 피드백 저장, 열람
-- AI 의 채팅을 클릭 시 DB에 답변 저장
-- 메인 페이지에 답변 확인하기를 통하여 DB에 저장된 텍스트 열람 
+- AI 의 채팅을 클릭 시 사용자의 ID 가 PK 로 설정된 테이블에 답변 저장
+- 메인 페이지에 답변 확인하기를 통하여 저장된 텍스트 열람 가능
+
+![Desktop2024 03 17-00 07 39 08online-video-cutter com1-ezgif com-resize](https://github.com/user-attachments/assets/def766af-35a9-4147-8c60-eeeab51e8c58)
   
 ## 🌎 배포
 #### Koyeb
