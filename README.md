@@ -10,6 +10,12 @@ Node.js + Express + React + MySQL + openAI API
 ### 🌎 배포 주소
  - https://ai-interview-ddenzu.koyeb.app/
 
+### 📃 세부 내용
+ - https://tidal-sky-46b.notion.site/Seung-Ju-Kim-ce8841c405754d8da3b302c3e7abfbc8?p=0a2fe29f877e475eb39f1c2c118feff3&pm=c
+
+### 📍 백엔드 레파지토리
+ - https://github.com/ddenzu/ai-interview0
+
 ### 🕰️ 개발 시작일
  - 23.12.6일
 
